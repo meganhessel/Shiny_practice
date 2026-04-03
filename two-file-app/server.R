@@ -3,6 +3,13 @@ server <- function(input, output) {
   
   # Filter trout data 
   trout_filtered_df <- reactive({
+    
+    # Validation test 
+    validate(
+      need(length(input$channel_type_input) > 0, "Please selected at least one selection to visualize data." )  # Need 1 channel type selected
+    )
+    
+    # Filter
     clean_trout |> 
       filter(channel_type %in% c(input$channel_type_input)) %>% 
       filter(section %in% c(input$section_input))
@@ -12,7 +19,7 @@ server <- function(input, output) {
   # render trout scatter plot --- 
   output$trout_scatterplot_output <- renderPlot({
     ggplot(trout_filtered_df(), aes(x = length_mm, y = weight_g, 
-                            color = channel_type, shape = channel_type)) +
+                                    color = channel_type, shape = channel_type)) +
       geom_point(alpha = 0.5, size = 5) +
       scale_color_manual(values = c("cascade" = "#2E2585", 
                                     "riffle" = "#337538", 
@@ -33,13 +40,23 @@ server <- function(input, output) {
            color = "Channel Type", 
            shape = "Channel Type") +
       myCustomTheme()
- 
-  })
-
+    
+  },
+  
+  alt = "This is my alt text for the trout"
+  
+  )
+  
   
   # ----- PENGUIN DATA ------ 
   # Filter penguin data 
   island_df <- reactive({
+    
+    # Validation test 
+    validate(
+      need(length(input$island_input) > 0, "Please selected at least one selection to visualize data." )) # Need 1 channel type selected
+    
+    # Filter
     penguins |> 
       filter(island %in% c(input$island_input))
   })
@@ -54,8 +71,12 @@ server <- function(input, output) {
       labs(x = "Flipper length (mm)", y = "Frequency",
            fill = "Penguin species") +
       myCustomTheme()
-  })
-
+  },
+  
+  alt = "This is my alt text for the trout"
+  
+  )
+  
   
 }
 

@@ -61,8 +61,9 @@ ui <- navbarPage(
                  
                  # Trout main panel 
                  mainPanel(
-                   plotOutput(outputId = "trout_scatterplot_output") # Place holder 
-                 ) # END trout main Panel
+                   plotOutput(outputId = "trout_scatterplot_output") %>%  # Place holder 
+                     withSpinner(color = "pink", type = 5, size = 2)
+                     ) # END trout main Panel
                  
                  
                ) # END trout sidebar Panel
@@ -96,7 +97,8 @@ ui <- navbarPage(
                  
                  # Penguin main panel 
                  mainPanel(
-                   plotOutput(outputId = "island_output") # Place holder
+                   plotOutput(outputId = "island_output") %>%  # Place holder 
+                     withSpinner(color = "lightblue", type = 8)
                  ) #END main panel
                  
                ) # END penguin sidebar layout 
