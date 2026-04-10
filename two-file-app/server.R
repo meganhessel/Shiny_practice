@@ -8,7 +8,6 @@ server <- function(input, output) {
     validate(
       need(length(input$channel_type_input) > 0, "Please selected at least one selection to visualize data." )  # Need 1 channel type selected
     )
-    
     # Filter
     clean_trout |> 
       filter(channel_type %in% c(input$channel_type_input)) %>% 
